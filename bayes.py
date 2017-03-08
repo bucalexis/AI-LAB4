@@ -9,7 +9,6 @@ import math
 
 nodes = []
 queries = []
-results = []
 def searchNode(name):
 	global nodes
 	if "+" in name:
@@ -27,8 +26,6 @@ def getRelevants(joint):
 
 	for element in joint:
 		jointNoSigns.append(element[1:])
-
-	#print jointNoSigns, joint
 
 	relevants = Set([])
 	visited = []
@@ -66,10 +63,6 @@ def combinateRelevants(relevants):
 			numberElement *= 2
 			counter *= 2
 
-	#combinations[0].append("ja",)
-	#print n
-
-	#print combinations
 	return combinations
 
 
@@ -137,21 +130,12 @@ def chain(fullList):
 
 
 def convertToJoinProb(query):
-	global results
+	
 	numerator = copy.copy(query.queries) + copy.copy(query.evidence)
 	denominator = copy.copy(query.evidence)
-	#print "numerator"
-	#for item in numerator:
-		#print item
-	#print "denominator"
-	#for item in denominator:
-		#print item
-	#print numerator
 	relevants = getRelevants(numerator)
-	#print "relevants::", relevants
 	combinations = combinateRelevants(relevants)
 
-  
 	acum = 0.0
 	if combinations:
 		for combination in combinations:
@@ -166,7 +150,6 @@ def convertToJoinProb(query):
 		acum2 = 1.0
 	if denominator:
 		relevants = getRelevants(denominator)
-		#print "relevants::", relevants
 		combinations = combinateRelevants(relevants)
 		if combinations:
 			for combination in combinations:
@@ -179,13 +162,6 @@ def convertToJoinProb(query):
 	result = round(acum/acum2,7)
 	print result
 
-def mergeLists(lista, listb):
-	listc = [];
-	for element in lista:
-		listc.append(element)
-	for element in listb:
-		listc.append(element)
-	return listc
 
 reader = InputReader()
 nodes, queries = reader.read()
