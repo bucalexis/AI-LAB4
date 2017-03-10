@@ -96,7 +96,7 @@ def chain(fullList):
 		while fullList:
 			noChilds = getNodesWithoutChilds(fullList)
 			for element in noChilds:
-				sign = element[0]
+				mark = element[0]
 				fullList.remove(element)
 				node = searchNode(element)
 				depending = copy.copy(fullList)
@@ -116,10 +116,10 @@ def chain(fullList):
 				for row in node.table:
 					res = row[0].symmetric_difference(depending)
 					if not res:
-						if "+" in sign:
+						if "+" in mark:
 							prob *= float(row[1])
 							probs.append(float(row[1]))
-						if "-" in sign:
+						if "-" in mark:
 							prob *= 1 - float(row[1])
 							probs.append(1-float(row[1]))
 		mult = 1.0
@@ -145,21 +145,21 @@ def convertToJoinProb(query):
 		fullList = numerator
 		acum += chain(fullList)
 	
-	acum2 = 0.0
+	acumAux = 0.0
 	if not denominator:
-		acum2 = 1.0
+		acumAux = 1.0
 	if denominator:
 		relevants = getRelevants(denominator)
 		combinations = combinateRelevants(relevants)
 		if combinations:
 			for combination in combinations:
 				fullList = denominator+ combination
-				acum2 += chain(fullList)
+				acumAux += chain(fullList)
 		else:
 			fullList = denominator
-			acum2 += chain(fullList)
+			acumAux += chain(fullList)
 
-	result = round(acum/acum2,7)
+	result = round(acum/acumAux,7)
 	print result
 
 
@@ -167,6 +167,7 @@ reader = InputReader()
 nodes, queries = reader.read()
 for query in queries:
 	convertToJoinProb(query)
+
 #noChilds= getNodesWithoutChilds(["-Alarm", "+JohnCalls","-Earthquake", "-MaryCalls", "+Burglary"])
 #noChilds= getNodesWithoutChilds(["-Earthquake", "-Alarm", "+Burglary"])
 #noChilds= getNodesWithoutChilds(["-Earthquake",  "+Burglary"])
