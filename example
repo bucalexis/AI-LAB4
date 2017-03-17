@@ -1,0 +1,18 @@
+# Specification file for Bayes Network
+
+[Nodes]
+Budget,Quality,Cost
+
+[Probabilities]
++Budget = 0.8
++Cost|+Budget = 0.6
++Cost|-Budget = 0.1
++Quality|+Budget = 0.9
++Quality|-Budget = 0.2
+
+[Queries]
++Budget
++Cost|+Budget
+-Quality|+Budget
++Cost
++Cost|-Budget,+Quality

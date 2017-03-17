@@ -160,7 +160,7 @@ def convertToJoinProb(query):
 			acumAux += chain(fullList)
 
 	result = round(acum/acumAux,7)
-	print result
+	print (result)
 
 
 reader = InputReader()

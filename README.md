@@ -1,4 +1,4 @@
-TC2011 - Bayes Network Lab
+﻿TC2011 - Bayes Network Lab
 Size of teams: each team must be made up of at most 2 students.
 Querying a Bayes Network
 For this lab, you have to write a program to Query a Bayes Network
@@ -66,7 +66,7 @@ Test, Ill
 +Test|-Ill=0.05
 
 [Queries]
-+Ill
++Ill 
 -Ill|+Test
 +Test|+Ill
 Output:
